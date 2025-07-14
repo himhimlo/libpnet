@@ -310,6 +310,8 @@ pub fn interfaces() -> Vec<NetworkInterface> {
         panic!("Unable to call GetAdaptersAddresses (dw_ret_val = {dw_ret_val})");
     }
 
+    unsafe { adapters.set_len(vec_size as usize); }
+
     // Create a complete list of NetworkInterfaces for the machine
     let mut cursor = adapters.as_mut_ptr();
     let mut all_ifaces = Vec::with_capacity(vec_size as usize);
